@@ -7,9 +7,9 @@ CREATE TABLE inversores (
     cuil VARCHAR(11) NOT NULL UNIQUE,
     email VARCHAR(100) NOT NULL UNIQUE,
     contraseña VARCHAR(255) NOT NULL,
-    saldo DECIMAL(10, 2) DEFAULT 0,
-    total_invertido DECIMAL(10, 2) DEFAULT 0,
-    rendimiento_total DECIMAL(10, 2) DEFAULT 0,
+    saldo FLOAT DEFAULT 0,
+    total_invertido FLOAT DEFAULT 0,
+    rendimiento_total FLOAT DEFAULT 0,
     intentos_fallidos INT DEFAULT 0,
     bloqueado BOOLEAN DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -24,8 +24,8 @@ CREATE TABLE recuperacion_contraseña (
 CREATE TABLE activos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre_activo VARCHAR(100) NOT NULL,
-    precio_compra DECIMAL(10, 2) NOT NULL,
-    precio_venta DECIMAL(10, 2) NOT NULL,
+    precio_compra FLOAT NOT NULL,
+    precio_venta FLOAT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE portafolio (
@@ -44,9 +44,9 @@ CREATE TABLE transacciones (
     activo_id INT,
     tipo_transaccion ENUM('compra', 'venta') NOT NULL,
     cantidad_acciones INT NOT NULL,
-    precio_transaccion DECIMAL(10, 2) NOT NULL,
-    comision DECIMAL(10, 2) NOT NULL,
-    total DECIMAL(10, 2) NOT NULL,
+    precio_transaccion FLOAT  NOT NULL,
+    comision FLOAT  NOT NULL,
+    total FLOAT NOT NULL,
     FOREIGN KEY (inversor_id) REFERENCES inversores(id),
     FOREIGN KEY (activo_id) REFERENCES activos(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
